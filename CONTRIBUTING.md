@@ -25,6 +25,10 @@ Gold Standard Packet Generator
   - [User Agent](https://github.com/selwin/python-user-agents)
   
   
+### Maybe Resources
+  - [nose(testing)](https://nose.readthedocs.io/en/latest/)
+
+  
   
   
   
