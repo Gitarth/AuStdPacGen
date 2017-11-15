@@ -1,9 +1,9 @@
 Gold Standard Packet Generator
 ![logo for Au packet generator][logo]
 # Contributing Guideline
-## TRY TO FOLLOW THESE GUIDELINE PLEASE
+## FOLLOW THESE GUIDELINE PLEASE
    - Include proper documentation so that anyone else can understand your code
-   - Try to include detailed commits 
+   - Include detailed commits 
    - Feel free to include your own contribution guidelines as well
    - Branch before making changes
    - Make sure to check twice before committing
