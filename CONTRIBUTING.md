@@ -19,14 +19,17 @@ Gold Standard Packet Generator
 ## Resources
   - [Pcap Tools (Analysis)](https://github.com/caesar0301/awesome-pcaptools#analysis)
   - [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
+      - [Scapy Github](https://github.com/secdev/scapy)
   - [Sys Documentation](https://docs.python.org/3/library/sys.html)
   - [Os Documentation](https://docs.python.org/3.6/library/os.html)
   - [Psutil](https://pypi.python.org/pypi/psutil)
   - [User Agent](https://github.com/selwin/python-user-agents)
+  - [tcpdump](http://www.tcpdump.org/)
   
   
 ### Maybe Resources
   - [nose(testing)](https://nose.readthedocs.io/en/latest/)
+  - [PyTgen](https://github.com/reissmann/PyTgen)
 
   
   
