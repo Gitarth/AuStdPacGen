@@ -8,9 +8,7 @@ class FileParser:
 
     NOT SURE IF WE'LL NEED THIS, BECAUSE WE CAN JUST PARSE LINE BY LINE
 
-    """
 
-    """
     def parseLine(self): #return one line of the file
         line = data[self.index].split(",") ##assume that it's CSV for now, split into an array
         self.index += 1 #increment the index so the hasNext() function can successfully test
@@ -20,36 +18,42 @@ class FileParser:
 
     """
 
-    def __init__(self, fileSrcArr): #FileParser will have to be initialized with String fileSrc which will be the path to the pcap file. We'll have to change this from path/to/file format to path.to.file format for Python
-        self.fileSrcArr = fileSrcArr
-        self.pktDataList = []
+    def __init__(self, fileSrc): #FileParser will have to be initialized with String fileSrc which will be the path to the pcap file. We'll have to change this from path/to/file format to path.to.file format for Python
+        self.fileSrc = fileSrc ## An array of file sources that we get from parsing arguments
+        self.pktDataList = [] # A list of data from the pcap files we read, we can parse through these later to send packets using them.
+
 
 
     def __str__(self): #toString() method for the parser just to show the fileSrc as String path
-        print(self.fileSrcArr) # just a simple str method to print the file sources
+        return self.fileSrc # just a simple str method to print the file source
 
     def parseFile(self):
-        for file in self.fileSrcArr:
-            try:
-                self.pktDataList.append(rdpcap(file))
-            except FileNotFoundError:
-                print("There is an invalid file that you have given")
+        ### self.pktDataList = rdpcap(self.fileSrc)
+
+        try:
+            self.pktDataList = rdpcap(self.fileSrc) ## just going to read the pcap and append that data to our list if it's valid
+
+        except FileNotFoundError: # catch the error if the file is invalid
+            print("Invalid File Name or Path - Please Check")
 
     def getPktData(self):
-        return self.pktDataList
-
+        return self.pktDataList # get method for run.py to use to pass to PacketGenerator
 
     def main(): ## Just a function to test the functionality of the FileParser, I think we can just print the lines here to test if they're actually being read and parsed
-        fileSrcArr = ["testFiles/test00.pcapng","testFiles/test01.pcapng"]
-        print(rdpcap(fileSrcArr[0]))
-        print(rdpcap(fileSrcArr[1]))
-        fp = FileParser(fileSrcArr)
-        print(fp)
+        from FileParser import FileParser
+        fileSrc = "testFiles/test00.pcapng"
+        print("File source: " , fileSrc)
+        fp = FileParser(fileSrc)
+        print( "FileParser's file source: " , fp)
         fp.parseFile()
-        pktsArray = fp.getPktData
-        for file in pktsArray:
-            for pkt in file:
-                pkt.show()
+        pktsArray = fp.getPktData()
+        for pkt in pktsArray:
+            pkt.show()
+
+        invalidFileSrc = "invalid.pcapng"
+        invalidFp = FileParser(invalidFileSrc)
+        print("")
+        invalidFp.parseFile()
 
     if __name__ == '__main__':
         print("Testing FileParser")
