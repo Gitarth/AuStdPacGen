@@ -4,6 +4,18 @@ from PacketGenerator import PacketGenerator
 from Remap import Remap
 ##import Remap
 
+"""
+11/28/17
+Authors: Ethan Hendrix, Hitarth Patel 
+
+run.py is the super-driver for the entire program, and it is the main program with which the user will interact
+run.py will instantiate a FileParser
+run.py will get the file names from the user then pass them to the FileParser
+after getting the array of data from the FileParser, it will instantiate a PacketGenerator
+then it will pass the array of data into its generate function
+once the generator is finished sending all of the packets, it will inform the user where the logs can be found
+"""
+
 def main():
     logFileLocation = "~/AuStdPacGen/logs"
     fileSrc = "testFiles/test00.pcapng"

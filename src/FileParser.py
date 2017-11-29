@@ -1,6 +1,12 @@
 from scapy.all import rdpcap
 import sys
+"""
+11/28/17
+Authors: Ethan Hendrix, Hitarth Patel
 
+FileParser will receive a file source from run.py
+It will read the PCAP file and return an array of packets for the Packet Generator to use  
+"""
 class FileParser:
 
     def __init__(self, fileSrc): #FileParser will have to be initialized with String fileSrc which will be the path to the pcap file. We'll have to change this from path/to/file format to path.to.file format for Python

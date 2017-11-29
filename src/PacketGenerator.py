@@ -1,28 +1,30 @@
 from Remap import Remap
-from scapy.all import send,rdpcap
+from scapy.all import send,rdpcap, wrpcap
+"""
+11/28/17
+Authors: Ethan Hendrix, Hitarth Patel
 
+PacketGenerator.py to create packets after receiving an array of packets from the file FileParser
+This will call Remap to remap all necessary information before the packets are sent
+"""
 class PacketGenerator:
 
-    def __init__(self, remapper):
-        self.remapper = remapper # I was thinking we could just take a fileParser as an init paramter this way we would already have it
+    def __init__(self):
+        self.remapper = Remap() # I was thinking we could just take a fileParser as an init paramter this way we would already have it
+        self.logPkts = []
 
     def generate(self, arrData):
         """
-        TODO: Remap the IPs
-
-        generate a packet based on the arrData that we will receive from the file parser as an array of the line
-        arrData should be an array of arrys that we receive from reading the pcap files
-
-        for data in arrData: # get the first array of packets
-            for pkt in data: # now get the individual packet
-                send(pkt) # send that packet
+        Generate packet functiont that will
         """
         for pkt in arrData:
-            
+
             # newPkt = self.remapper.remap(pkt)
             # send(newPkt)
-            send(pkt)
+            send(pkt) # will be phased out after the remapping is done
+            # self.logPkts.append(newPkt)
 
+        wrpcap("logs/temp.pcap", arrData) # will change to logPkts after the remapping
     def getRemapper(self):
         return self.remapper # simple get method to return file parser for simplicity's sake when implementing our driver
 
