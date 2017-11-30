@@ -30,7 +30,7 @@ def main():
     print("Log file(s) located: ",logFileLocation)
 
 if __name__ == "__main__":
-    print("Welcome to the Gold Standard Packet Generator!")
+    print("Welcome to the Gold Standard Traffic Replayer!")
     print("Please enter your command in the form generate -f filename1 filename2 filenameX\n")
 
     main()
