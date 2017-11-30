@@ -11,10 +11,11 @@ TODO:
 """
 class PacketGenerator:
 
-    def __init__(self):
-        self.remapper = Remap() # I was thinking we could just take a fileParser as an init paramter this way we would already have it
+    def __init__(self,source_ip):
+        self.remapper = Remap(source_ip) # I was thinking we could just take a fileParser as an init paramter this way we would already have it
         ## self.local_ips = ["10.0.0.0","172.16.0.0","192.168.0.0"]
         self.logPkts = []
+        self.source_ip = source_ip
 
 
     def is_local(self, pkt):
@@ -50,6 +51,7 @@ class PacketGenerator:
                 self.logPkts.append(newPkt)
                 send(newPkt)
             else:
+                pkt[IP].src = self.source_ip
                 send(pkt)
                 self.logPkts.append(pkt)
 
