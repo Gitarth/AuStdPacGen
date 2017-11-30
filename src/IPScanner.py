@@ -6,11 +6,11 @@ def main():
     import ipaddress
     from subprocess import Popen, PIPE
 
-    network = ipaddress.ip_network('192.168.100.0/24')
+    network = ipaddress.ip_network()
 
     for i in network.hosts():
         i = str(i)
-        toping = Popen(['ping','-c','3', i], stdout = PIPE)
+        toping = Popen(['ping','-c','3', '-W', '200' i], stdout = PIPE)
         output = toping.communicate()[0]
         hostalive = toping.returncode
         if hostalive == 0:
