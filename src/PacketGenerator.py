@@ -6,25 +6,56 @@ Authors: Ethan Hendrix, Hitarth Patel
 
 PacketGenerator.py to create packets after receiving an array of packets from the file FileParser
 This will call Remap to remap all necessary information before the packets are sent
+
+TODO:
 """
 class PacketGenerator:
 
     def __init__(self):
         self.remapper = Remap() # I was thinking we could just take a fileParser as an init paramter this way we would already have it
+        self.local_ips = ["10.0.0.0","172.16.0.0","192.168.0.0"]
         self.logPkts = []
+
+
+    def is_local(self, pkt):
+        """
+        TODO: write a method to determine if the packet is local or not
+
+        method to see if the packet is a local packet
+        if it is a local packet we will remap it
+        """
+        try:
+            dst = pkt[IP].dst.split(".")
+            if(dst[0] == "10"):
+                return True
+            elif(dst[0] == "172" and dst[1] == "16"):
+                return True
+            elif(dst[0] == "192" and dst[1] == "168"):
+                return True
+            else:
+                return False
+        except:
+            return False
+
+
+
+        return False
 
     def generate(self, arrData):
         """
         Generate packet functiont that will
         """
         for pkt in arrData:
+            if self.is_local(pkt):
+                newPkt = self.remapper.remap(pkt)
+                self.logPkts.append(newPkt)
+                send(newPkt)
+            else:
+                send(pkt)
+                self.logPkts.append(pkt)
 
-            # newPkt = self.remapper.remap(pkt)
-            # send(newPkt)
-            send(pkt) # will be phased out after the remapping is done
-            # self.logPkts.append(newPkt)
+        wrpcap("logs/temp.pcap", self.logPkts) # will change to logPkts after the remapping
 
-        wrpcap("logs/temp.pcap", arrData) # will change to logPkts after the remapping
     def getRemapper(self):
         return self.remapper # simple get method to return file parser for simplicity's sake when implementing our driver
 

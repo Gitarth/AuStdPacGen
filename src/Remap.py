@@ -5,7 +5,7 @@ class Remap:
 
     def __init__(self):
         self.available_hosts = []
-        self.lanIP = "127.0.0.1"
+        self.lanIP = ""
         self.network = "127.0.0.1"
 
     def findNetwork(self):
@@ -14,7 +14,7 @@ class Remap:
     def getNetwork(self):
         return self.network
 
-    def findHosts(self):    
+    def findHosts(self):
         net = IPv4Network(self.network)
         self.available_hosts = list(net.hosts())
 

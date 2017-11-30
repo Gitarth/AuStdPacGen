@@ -6,7 +6,7 @@ from Remap import Remap
 
 """
 11/28/17
-Authors: Ethan Hendrix, Hitarth Patel 
+Authors: Ethan Hendrix, Hitarth Patel
 
 run.py is the super-driver for the entire program, and it is the main program with which the user will interact
 run.py will instantiate a FileParser
@@ -20,7 +20,7 @@ def main():
     logFileLocation = "~/AuStdPacGen/logs"
     fileSrc = "testFiles/test00.pcapng"
     fp = FileParser(fileSrc)
-    pg = PacketGenerator(Remap())
+    pg = PacketGenerator()
     fp.parseFile()
     data = fp.getPktData()
     for pkt in data:

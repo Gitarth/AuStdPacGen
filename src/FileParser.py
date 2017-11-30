@@ -5,7 +5,7 @@ import sys
 Authors: Ethan Hendrix, Hitarth Patel
 
 FileParser will receive a file source from run.py
-It will read the PCAP file and return an array of packets for the Packet Generator to use  
+It will read the PCAP file and return an array of packets for the Packet Generator to use
 """
 class FileParser:
 
