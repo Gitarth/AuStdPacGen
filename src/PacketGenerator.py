@@ -11,11 +11,13 @@ TODO:
 """
 class PacketGenerator:
 
-    def __init__(self,source_ip,available_hosts):
+    def __init__(self,source_ip,available_hosts,fileSrc):
         self.remapper = Remap(source_ip,available_hosts) # I was thinking we could just take a fileParser as an init paramter this way we would already have it
         ## self.local_ips = ["10.0.0.0","172.16.0.0","192.168.0.0"]
         self.logPkts = []
         self.source_ip = source_ip
+        self.logDst = "logs/"+fileSrc.split("/")[-1]
+        self.fileSrc = fileSrc
 
 
     def is_local(self, pkt):
@@ -55,7 +57,7 @@ class PacketGenerator:
                 send(pkt)
                 self.logPkts.append(pkt)
 
-        wrpcap("logs/temp.pcap", self.logPkts) # will change to logPkts after the remapping
+        wrpcap(self.logDst, self.logPkts) # will change to logPkts after the remapping
 
     def getRemapper(self):
         return self.remapper # simple get method to return file parser for simplicity's sake when implementing our driver
