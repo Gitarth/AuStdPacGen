@@ -10,13 +10,17 @@ Python file to find online hosts. This
 will scan all of the IPs on a given network
 and return the ones that are online. These IPs
 will be returned to the Remap class, so it
-can properly remap IP addresses 
+can properly remap IP addresses
 """
 
 class IPScanner:
+
     def __init__(self):
         self.available_hosts = []
 
+
+    def __str__(self):
+        return "Your IP Scanner Has Been Created"
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)
 
@@ -42,15 +46,18 @@ class IPScanner:
         output_file.write(output_string)
         output_file.close()
 
-        self.available_hosts = available_hosts
+        return available_hosts
+
+    """
     def get_available_hosts(self):
         return self.available_hosts
+    """
 
     def main():
         from IPScanner import IPScanner
         net_addr = "192.168.1.0/24"
         print("The network address ", net_addr)
-        network = ipaddress.ip_network(net_addr)
+        ### network = ipaddress.ip_network(net_addr)
         ip_scanner = IPScanner()
         ip_scanner.find_online_hosts(net_addr)
         available_hosts = ip_scanner.get_available_hosts()

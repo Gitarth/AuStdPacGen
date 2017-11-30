@@ -18,8 +18,8 @@ once the generator is finished sending all of the packets, it will inform the us
 """
 
 def create_parser():
-    parser.add_argument('-f', '--pcapfiles', nargs="+", help="Enter pcap traffic file to replay")
     parser = argparse.ArgumentParser( description = "Gold Standard Traffic Replayer")
+    parser.add_argument('-f', '--pcapfiles', nargs="+", help="Enter pcap traffic file to replay")
     parser.add_argument('-ip', '--hostip', help="Enter your host ip")
     parser.add_argument('-na','--netaddr', help="Enter network address with netmask")
     args = parser.parse_args()
@@ -45,15 +45,19 @@ def main():
     net_addr = args.netaddr
 
     scanner = IPScanner()
-    scanner.find_online_hosts(net_addr)
-    available_hosts = scanner.get_available_hosts()
+    print(scanner)
+    available_hosts = scanner.find_online_hosts(net_addr)
+    ##available_hosts = scanner.get_available_hosts()
+    print("Available Hosts = ", available_hosts)
     """
     thread:
     FileParser
     PacketGenerator
-    """
 
     pg = PacketGenerator(source_ip,available_hosts)
+    """
+
+
 
 
     print("\nYour packets have finished being generated and sent - please check the log file")
