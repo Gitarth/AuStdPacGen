@@ -8,15 +8,20 @@ Austre is a multithreaded network traffic replayer. It's sole purpose is to dupl
 ## Use
 - Make sure you have the latest version of Python installed.
     - ![Python](https://www.python.org/downloads/)
+- ![Clone the Repository](https://github.com/Gitarth/AuStdTrRe.git)
+    - Once cloned, please change the working directory to "AuStdTrRe".
+    - cd to `AuStdTrRe/src` 
 - Make sure that all dependencies are installed before running the tool
     - ![Scapy](https://github.com/secdev/scapy)
-- Make sure to include network address **AND** netmask
 - To start the program:
     - sudo python3 run.py -f [pcapFile1, pcapFile2, pcapFile3, .... , pcapFileN] -ip Src -na Network Address with Netmask
     - example: ```terminal
                   sudo python3 austre.py -f file1.pcap file2.pcap file3.pcap -ip 10.0.0.20 -na 10.0.0.0/24
                ```
+    - Make sure to run the command with **sudo**
     - __**Keep in mind that the flags are not positional and are required.**__
+- Make sure to include network address **AND** netmask
+    - **Disclaimer: Please double-check your host IP and your network address inputs**
 - Please give the tool a few minutes to scan your whole network. This is based on your network address and netmask.
     - For example: ```
                       Your IP scanner has been created.
