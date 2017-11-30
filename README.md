@@ -11,8 +11,9 @@ Austre is a multithreaded network traffic replayer. It's sole purpose is to dupl
 - To start the program:
     - sudo python3 run.py -f [pcapFile1, pcapFile2, pcapFile3, .... , pcapFileN] -ip Src -na Network Address with Netmask
     - example: ```terminal
-                  sudo python3 run.py -f file1.pcap file2.pcap file3.pcap -ip 10.0.0.20 -na 10.0.0.0/24
+                  sudo python3 austre.py -f file1.pcap file2.pcap file3.pcap -ip 10.0.0.20 -na 10.0.0.0/24
                ```
+    - __**Keep in mind that the flags are not positional and are required.**__
 - Please give the tool a few minutes to scan your whole network. This is based on your network address and netmask.
     - For example: ```
                       Your IP scanner has been created.
@@ -20,7 +21,7 @@ Austre is a multithreaded network traffic replayer. It's sole purpose is to dupl
                    ```
     - ***Disclaimer: If you plan to have a really large netmask, then please be prepared to do some sidework, because best bet is it'll take a good bit of your time to scan the network.***
 
-- Logs will be stored in ~/AuStdTrRe/logs/ 
-    - Will find pcap log files and json log files
+- Logs will be stored in ~/austre/logs/ 
+    - Will find pcap log files
 
 
