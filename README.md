@@ -3,14 +3,14 @@
 Gold Standard Traffic Replayer For Computer Networks
 
 ## Introduction
-Austre is a multithreaded network traffic replayer. It's sole purpose is to duplicate traffic based on user input pcap files. Users can input multiple pcap files to test the network on. Logging for each file is also included with a JSON format file  for network transfer and inspection. 
+Austre is a multithreaded network traffic replayer. It's sole purpose is to duplicate traffic based on user input pcap files. Users can input multiple pcap files to test the network on. Logging for each file is also included with a JSON format file  for network transfer and inspection.
 
 ## Use
 - Make sure you have the latest version of Python installed.
     - ![Python](https://www.python.org/downloads/)
 - ![Clone the Repository](https://github.com/Gitarth/AuStdTrRe.git)
     - Once cloned, please change the working directory to "AuStdTrRe".
-    - cd to `AuStdTrRe/src` 
+    - cd to `AuStdTrRe/src`
 - Make sure that all dependencies are installed before running the tool
     - ![Scapy](https://github.com/secdev/scapy)
 - To start the program:
@@ -29,7 +29,6 @@ Austre is a multithreaded network traffic replayer. It's sole purpose is to dupl
                    ```
     - ***Disclaimer: If you plan to have a really large netmask, then please be prepared to do some sidework, because best bet is it'll take a good bit of your time to scan the network.***
 
-- Logs will be stored in ~/AuStdTrRe/austre_logs/ 
+- Logs will be stored in ~/AuStdTrRe/austre_logs/
     - Will find pcap log files
-
-
+    - Will find json formatted logs aswell for data transfer
