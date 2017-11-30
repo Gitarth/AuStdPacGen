@@ -10,23 +10,30 @@ class IPScanner:
     def __init__(self):
         self.available_hosts = []
 
-    def find_online_hosts(self):
-        network = ipaddress.ip_network("10.0.0.0/24")
+    def find_online_hosts(self,net_addr):
+        network = ipaddress.ip_network(net_addr)
 
         available_hosts = []
-        ###count = 0
+        count = 0
 
         for i in network.hosts():
 
             i = str(i)
-            toping = Popen(['ping','-c','3', '-W', '200', i], stdout = PIPE)
+            toping = Popen(['ping','-c','1', '-W', '200', i], stdout = PIPE)
             output = toping.communicate()[0]
             hostalive = toping.returncode
             if hostalive == 0:
-                ##print (i, "is appended to the list.")
+                print (i, "is appended to the list.")
                 available_hosts.append(i)
-            ##count += 1
-            ###print("So far " + str(count) + " ips scanned.")
+            count += 1
+            print("So far " + str(count) + " ips scanned.")
+
+        output_file = open("available_hosts","w")
+        output_string = ""
+        for host in available_hosts:
+            output_string += host + "\n"
+        output_file.write(output_string)
+        output_file.close()
 
         self.available_hosts = available_hosts
     def get_available_hosts(self):
@@ -38,7 +45,7 @@ class IPScanner:
         print("The network address ", net_addr)
         network = ipaddress.ip_network(net_addr)
         ip_scanner = IPScanner()
-        ip_scanner.find_online_hosts()
+        ip_scanner.find_online_hosts(net_addr)
         available_hosts = ip_scanner.get_available_hosts()
         print("The available hosts are: \n", available_hosts)
 
