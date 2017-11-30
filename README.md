@@ -1,6 +1,6 @@
 ![Gold Standard Logo](https://github.com/Gitarth/AuStdPacGen/blob/master/austdpacketgen.png)
 # AuStdTre
-Gold Standard Traffic Replayer For Computer Networks and Operating System
+Gold Standard Traffic Replayer For Computer Networks
 
 ## Introduction
 Austre is a multithreaded network traffic replayer. It's sole purpose is to duplicate traffic based on user input pcap files. Users can input multiple pcap files to test the network on. Logging for each file is also included with a JSON format file  for network transfer and inspection. 
