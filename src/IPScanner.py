@@ -10,7 +10,7 @@ def main():
 
     for i in network.hosts():
         i = str(i)
-        toping = Popen(['ping','-c','3', '-W', '200' i], stdout = PIPE)
+        toping = Popen(['ping','-c','3', '-W', '200', i], stdout = PIPE)
         output = toping.communicate()[0]
         hostalive = toping.returncode
         if hostalive == 0:
