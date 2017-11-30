@@ -45,19 +45,20 @@ class PacketGenerator:
                 return False
         except:
                 return False
-
+    """
     def pcap_to_json(self):
         source = self.logDst
         destination = "json>"+source.split(".")[0]+".json"
         execute_arr = ['tshark','-r',source,'-T',destination]
         subprocess.run(execute_arr)
 
-        """
+
         with open('wrjson.json', 'w') as f:
             json.dump(data, f, sort_keys=True, indent=4)
-        """
 
 
+
+    """
 
     def generate(self, arrData):
         """
@@ -74,7 +75,7 @@ class PacketGenerator:
                 self.logPkts.append(pkt)
 
         wrpcap(self.logDst, self.logPkts) # will change to logPkts after the remapping
-        ###self.pcap_to_json()
+
 
     def getRemapper(self):
         return self.remapper # simple get method to return file parser for simplicity's sake when implementing our driver
@@ -94,6 +95,7 @@ class PacketGenerator:
         test function for our PacketGenerator
         arrData = [ source, destination, source_port, destination_port, protocol ]
         """
+        
         available_hosts = ["192.168.1.111","192.168.1.254"]
         source_ip = "192.168.1.111"
         pg = PacketGenerator(source_ip, available_hosts)

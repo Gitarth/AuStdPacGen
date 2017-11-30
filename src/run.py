@@ -75,46 +75,48 @@ def main():
     fileSrcArr = args.pcapfiles
     source_ip = args.hostip
     net_addr = args.netaddr
+    try:
+        scanner = IPScanner()
+        print(scanner)
+        available_hosts = scanner.find_online_hosts(net_addr)
+        ##available_hosts = ["192.168.1.254","192.168.1.65","192.168.1.66"]
 
-    scanner = IPScanner()
-    print(scanner)
-    available_hosts = scanner.find_online_hosts(net_addr)
-    ##available_hosts = ["192.168.1.254","192.168.1.65","192.168.1.66"]
+        print("Available Hosts = ", available_hosts)
+        """
+        thread:
+        FileParser
+        PacketGenerator
 
-    print("Available Hosts = ", available_hosts)
-    """
-    thread:
-    FileParser
-    PacketGenerator
+        pg = PacketGenerator(source_ip,available_hosts)
+        """
+        ## q = queue.Queue()
+        threads = []
+        ## creating threads
+        print("Creating your threads now")
+        for i in range(getListSize(args)):
+            t = threading.Thread(target=thread_task(fileSrcArr[i],source_ip,available_hosts))
+            t.start()
+            threads.append(t)
 
-    pg = PacketGenerator(source_ip,available_hosts)
-    """
-    ## q = queue.Queue()
-    threads = []
-    ## creating threads
-    print("Creating your threads now")
-    for i in range(getListSize(args)):
-        t = threading.Thread(target=thread_task(fileSrcArr[i],source_ip,available_hosts))
-        t.start()
-        threads.append(t)
+        ##print(threads)
+        """
+        for file_path in args.pcapfiles:
+            q.put(file_path)
 
-    ##print(threads)
-    """
-    for file_path in args.pcapfiles:
-        q.put(file_path)
+        # wait for threads to be finished
+        q.join()
 
-    # wait for threads to be finished
-    q.join()
-
-    # to stop thread_task
-    for i in range(getListSize):
-        q.put(None)
-    # to join threads after completion
-    """
-    for t in threads:
-        t.join()
-    print("\nYour packets have finished being generated and sent - please check the log file")
-    print("Log file(s) located: ",logFileLocation)
+        # to stop thread_task
+        for i in range(getListSize):
+            q.put(None)
+        # to join threads after completion
+        """
+        for t in threads:
+            t.join()
+        print("\nYour packets have finished being generated and sent - please check the log file")
+        print("Log file(s) located: ",logFileLocation)
+    except AttributeError:
+        print("\nYou forgor your netmask - please enter in format -na X.X.X.X/xx")
 
 if __name__ == "__main__":
     print("Welcome to the Gold Standard Traffic Replayer!")
