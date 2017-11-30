@@ -31,7 +31,7 @@ class IPScanner:
         for i in network.hosts():
 
             i = str(i)
-            toping = Popen(['ping','-c','3', '-W', '1', i], stdout = PIPE)
+            toping = Popen(['ping','-c','2', '-W', '1', i], stdout = PIPE)
             output = toping.communicate()[0]
             hostalive = toping.returncode
             if hostalive == 0:
