@@ -78,7 +78,7 @@ def main():
 
     scanner = IPScanner()
     print(scanner)
-    ## available_hosts = scanner.find_online_hosts(net_addr)
+    ##available_hosts = scanner.find_online_hosts(net_addr)
     available_hosts = ["192.168.1.254","192.168.1.65","192.168.1.66"]
 
     print("Available Hosts = ", available_hosts)
@@ -98,7 +98,7 @@ def main():
         t.start()
         threads.append(t)
 
-    print(threads)
+    ##print(threads)
     """
     for file_path in args.pcapfiles:
         q.put(file_path)

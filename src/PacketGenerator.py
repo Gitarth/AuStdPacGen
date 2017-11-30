@@ -1,5 +1,8 @@
 from Remap import Remap
 from scapy.all import * #send,rdpcap, wrpcap
+import subprocess
+import json
+
 """
 11/28/17
 Authors: Ethan Hendrix, Hitarth Patel
@@ -16,7 +19,7 @@ class PacketGenerator:
         ## self.local_ips = ["10.0.0.0","172.16.0.0","192.168.0.0"]
         self.logPkts = []
         self.source_ip = source_ip
-        self.logDst = "logs/"+fileSrc.split("/")[-1]
+        self.logDst = "logs/" + fileSrc.split("/")[-1].split(".")[0] +"_log.pcapng"
         self.fileSrc = fileSrc
 
 
@@ -43,6 +46,19 @@ class PacketGenerator:
         except:
                 return False
 
+    def pcap_to_json(self):
+        source = self.logDst
+        destination = "json>"+source.split(".")[0]+".json"
+        execute_arr = ['tshark','-r',source,'-T',destination]
+        subprocess.run(execute_arr)
+
+        """
+        with open('wrjson.json', 'w') as f:
+            json.dump(data, f, sort_keys=True, indent=4)
+        """
+
+
+
     def generate(self, arrData):
         """
         Generate packet function that will
@@ -58,6 +74,7 @@ class PacketGenerator:
                 self.logPkts.append(pkt)
 
         wrpcap(self.logDst, self.logPkts) # will change to logPkts after the remapping
+        ###self.pcap_to_json()
 
     def getRemapper(self):
         return self.remapper # simple get method to return file parser for simplicity's sake when implementing our driver
