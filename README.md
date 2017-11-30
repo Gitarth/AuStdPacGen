@@ -29,7 +29,7 @@ Austre is a multithreaded network traffic replayer. It's sole purpose is to dupl
                    ```
     - ***Disclaimer: If you plan to have a really large netmask, then please be prepared to do some sidework, because best bet is it'll take a good bit of your time to scan the network.***
 
-- Logs will be stored in ~/austre/logs/ 
+- Logs will be stored in ~/AuStdTrRe/austre_logs/ 
     - Will find pcap log files
 
 
