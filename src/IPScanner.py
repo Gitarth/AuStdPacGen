@@ -37,7 +37,7 @@ class IPScanner:
                 print (i, "is appended to the list.")
                 available_hosts.append(i)
             count += 1
-            print("So far " + str(count) + " ips scanned.")
+            print('\r'+ "So far " + str(count) + " ips scanned.", end='')
 
         output_file = open("logs/available_hosts.txt","w")
         output_string = ""
