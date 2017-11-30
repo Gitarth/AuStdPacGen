@@ -21,7 +21,7 @@ class Remap:
 
     def remap(self, pkt):
         try:
-            i = randint(0,255) % len(self.available_hosts)
+            i = randint(1,255) % len(self.available_hosts)
             rand_host = self.available_hosts[i]
             pkt[IP].src = self.source_ip
             pkt[IP].dst = rand_host
