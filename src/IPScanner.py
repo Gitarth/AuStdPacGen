@@ -3,7 +3,14 @@ import ipaddress
 from subprocess import Popen, PIPE
 
 """
-Python file to find online hosts
+11/29/17
+Authors: Hitarth Patel, Ethan Hendrix
+
+Python file to find online hosts. This
+will scan all of the IPs on a given network
+and return the ones that are online. These IPs
+will be returned to the Remap class, so it
+can properly remap IP addresses 
 """
 
 class IPScanner:

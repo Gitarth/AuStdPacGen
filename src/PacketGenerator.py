@@ -11,8 +11,8 @@ TODO:
 """
 class PacketGenerator:
 
-    def __init__(self,source_ip):
-        self.remapper = Remap(source_ip) # I was thinking we could just take a fileParser as an init paramter this way we would already have it
+    def __init__(self,source_ip,available_hosts):
+        self.remapper = Remap(source_ip,available_hosts) # I was thinking we could just take a fileParser as an init paramter this way we would already have it
         ## self.local_ips = ["10.0.0.0","172.16.0.0","192.168.0.0"]
         self.logPkts = []
         self.source_ip = source_ip
@@ -67,6 +67,7 @@ class PacketGenerator:
         from PacketGenerator import PacketGenerator
         from Remap import Remap
         from FileParser import FileParser
+        from scapy.all import rdpcap
 
         """
         TODO:
@@ -74,8 +75,9 @@ class PacketGenerator:
         test function for our PacketGenerator
         arrData = [ source, destination, source_port, destination_port, protocol ]
         """
-
-        pg = PacketGenerator()
+        available_hosts = ["192.168.1.111","192.168.1.254"]
+        source_ip = "192.168.1.111"
+        pg = PacketGenerator(source_ip, available_hosts)
         fp = FileParser("testFiles/test00.pcapng")
         fp.parseFile()
         pkts = fp.getPktData()
@@ -96,6 +98,9 @@ class PacketGenerator:
             print("Result = %s - Test Passed!\n")
         else:
             print("Result = %s - Test Failed!\n")
+
+        arrData = rdpcap("testFiles/test00.pcapng")
+        pg.generate(arrData)
 
         ##print("Testing ability to generate packets")
         ##pg.generate(pkts)
