@@ -113,7 +113,8 @@ def main():
     """
     for t in threads:
         t.join()
-
+    print("\nYour packets have finished being generated and sent - please check the log file")
+    print("Log file(s) located: ",logFileLocation)
 
 if __name__ == "__main__":
     print("Welcome to the Gold Standard Traffic Replayer!")
