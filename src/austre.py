@@ -79,7 +79,7 @@ def main():
         scanner = IPScanner()
         print(scanner)
         available_hosts = scanner.find_online_hosts(net_addr)
-        ##available_hosts = ["192.168.1.254","192.168.1.65","192.168.1.66"]
+        ###available_hosts = ["10.10.1.1","10.10.1.2","10.10.1.3"]
 
         print("Available Hosts = ", available_hosts)
         """
