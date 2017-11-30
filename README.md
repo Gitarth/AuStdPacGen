@@ -6,7 +6,10 @@ Gold Standard Traffic Replayer For Computer Networks and Operating System
 Austre is a multithreaded network traffic replayer. It's sole purpose is to duplicate traffic based on user input pcap files. Users can input multiple pcap files to test the network on. Logging for each file is also included with a JSON format file  for network transfer and inspection. 
 
 ## Use
+- Make sure you have the latest version of Python installed.
+    - ![Python](https://www.python.org/downloads/)
 - Make sure that all dependencies are installed before running the tool
+    - ![Scapy](https://github.com/secdev/scapy)
 - Make sure to include network address **AND** netmask
 - To start the program:
     - sudo python3 run.py -f [pcapFile1, pcapFile2, pcapFile3, .... , pcapFileN] -ip Src -na Network Address with Netmask
