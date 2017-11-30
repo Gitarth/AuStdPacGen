@@ -28,7 +28,7 @@ class IPScanner:
             count += 1
             print("So far " + str(count) + " ips scanned.")
 
-        output_file = open("available_hosts","w")
+        output_file = open("logs/available_hosts.txt","w")
         output_string = ""
         for host in available_hosts:
             output_string += host + "\n"
