@@ -1,7 +1,7 @@
 import subprocess
 import ipaddress
 from subprocess import Popen, PIPE
-
+from multiprocessing import Pool
 
 """
 11/29/17
@@ -22,32 +22,64 @@ class IPScanner:
 
     def __str__(self):
         return "Your IP Scanner Has Been Created"
+
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)
 
         available_hosts = []
         count = 0
 
-        for i in network.hosts():
+        # for i in network.hosts():
+        #
+        #     i = str(i)
+        #     toping = Popen(['ping','-c','2', '-W', '1', i], stdout = PIPE)
+        #     output = toping.communicate()[0]
+        #     hostalive = toping.returncode
+        #     if hostalive == 0:
+        #         print (i, "is appended to the list.")
+        #         available_hosts.append(i)
+        #     count += 1
+        #     print('\r'+ "So far " + str(count) + " ips scanned.", end='')
+    @staticmethod
+    def check_host(i):
+        i = str(i)
+        toping = Popen(['ping','-c','2', '-W', '1', i], stdout = PIPE)
+        output = toping.communicate()[0]
+        hostalive = toping.returncode
+        if hostalive == 0:
+            print(i, "is appended to the list.")
+            return i
+        return None
+        print('\r'+ "So far" + i + " ips scanned.", end=" ")
 
-            i = str(i)
-            toping = Popen(['ping','-c','2', '-W', '1', i], stdout = PIPE)
-            output = toping.communicate()[0]
-            hostalive = toping.returncode
-            if hostalive == 0:
-                print (i, "is appended to the list.")
-                available_hosts.append(i)
-            count += 1
-            print('\r'+ "So far " + str(count) + " ips scanned.", end='')
+    def find_online_hosts(self,net_addr):
+        network = ipaddress.ip_network(net_addr)
 
-        output_file = open("logs/available_hosts.txt","w")
-        output_string = ""
-        for host in available_hosts:
-            output_string += host + "\n"
-        output_file.write(output_string)
-        output_file.close()
+        with Pool(20) as p:
+            available_hosts = p.map(self.check_host, network.hosts())
 
-        return available_hosts
+            available_hosts = [ i for i in available_hosts if i is not None ]
+
+            p.close()
+            p.join()
+
+            output_file = open("logs/available_hosts.txt","w")
+            output_string = ""
+            for host in available_hosts:
+                output_string += host + "\n"
+                output_file.write(output_string)
+                output_file.close()
+
+                return available_hosts
+
+        # output_file = open("logs/available_hosts.txt","w")
+        # output_string = ""
+        # for host in available_hosts:
+        #     output_string += host + "\n"
+        # output_file.write(output_string)
+        # output_file.close()
+        #
+        # return available_hosts
 
     """
     def get_available_hosts(self):
