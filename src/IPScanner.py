@@ -55,7 +55,7 @@ class IPScanner:
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)
 
-        with Pool(20) as p:
+        with Pool(10) as p:
             available_hosts = p.map(self.check_host, network.hosts())
 
             available_hosts = [ i for i in available_hosts if i is not None ]
