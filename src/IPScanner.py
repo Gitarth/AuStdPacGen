@@ -50,7 +50,7 @@ class IPScanner:
             print(i, "is appended to the list.")
             return i
         return None
-        print('\r'+ "So far" + i + " ips scanned.", end=" ")
+        #print('\r'+ "So far" + i + " ips scanned.", end=" ")
 
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)
