@@ -20,7 +20,7 @@ class IPScanner:
 
 
     def __str__(self):
-        return "Your IP Scanner Has Been Created and is now scanning for IPs..."
+        return "\nYour IP Scanner Has Been Created and is now scanning for IPs...\n"
 
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)

@@ -80,8 +80,10 @@ def main():
         print(scanner)
         available_hosts = scanner.find_online_hosts(net_addr)
         ###available_hosts = ["10.10.1.1","10.10.1.2","10.10.1.3"]
+        print("====================================================")
+        print("\nAvailable Hosts = ", available_hosts,"\n")
+        print("====================================================")
 
-        print("Available Hosts = ", available_hosts)
         """
         thread:
         FileParser
@@ -92,11 +94,16 @@ def main():
         ## q = queue.Queue()
         threads = []
         ## creating threads
-        print("Creating your threads now")
+        print("====================================================")
+        print("\nCreating your threads now")
+        thread_count = 1
         for i in range(getListSize(args)):
+            print("\t Thread " + str(thread_count) + " created.")
+            thread_count += 1
             t = threading.Thread(target=thread_task(fileSrcArr[i],source_ip,available_hosts))
             t.start()
             threads.append(t)
+        print("\n===================================================")
 
         ##print(threads)
         """
@@ -113,13 +120,18 @@ def main():
         """
         for t in threads:
             t.join()
+
+        print("====================================================")
         print("\nYour packets have finished being generated and sent - please check the log file")
         print("Log file(s) located: ",logFileLocation)
+        print("====================================================")
     except AttributeError:
         print("\nYou forgor your netmask - please enter in format -na X.X.X.X/xx")
 
 if __name__ == "__main__":
+    print("===================================================")
     print("Welcome to the Gold Standard Traffic Replayer!")
+    print("===================================================")
     ## print("Please enter your command in the form generate -f filename1 filename2 filenameX\n")
 
     main()
