@@ -13,7 +13,6 @@ and return the ones that are online. These IPs
 will be returned to the Remap class, so it
 can properly remap IP addresses
 """
-
 class IPScanner:
 
     def __init__(self):
@@ -21,7 +20,7 @@ class IPScanner:
 
 
     def __str__(self):
-        return "Your IP Scanner Has Been Created"
+        return "Your IP Scanner Has Been Created and is now scanning for IPs..."
 
     def find_online_hosts(self,net_addr):
         network = ipaddress.ip_network(net_addr)
@@ -58,7 +57,7 @@ class IPScanner:
         with Pool(20) as p:
             available_hosts = p.map(self.check_host, network.hosts())
 
-            available_hosts = [ i for i in available_hosts if i is not None ]
+            available_hosts = [ i for i in available_hosts if i is not None]
 
             p.close()
             p.join()
