@@ -68,10 +68,10 @@ class PacketGenerator:
             if self.is_local(pkt):
                 newPkt = self.remapper.remap(pkt)
                 self.logPkts.append(newPkt)
-                send(newPkt, verbose=0)
+                sendp(newPkt, verbose=0)
             else:
                 pkt[IP].src = self.source_ip
-                send(pkt, verbose=0)
+                sendp(pkt, verbose=0)
                 self.logPkts.append(pkt)
 
         wrpcap(self.logDst, self.logPkts) # will change to logPkts after the remapping
