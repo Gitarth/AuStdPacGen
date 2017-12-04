@@ -3,10 +3,8 @@ from scapy.all import rdpcap
 from PacketGenerator import PacketGenerator
 from Remap import Remap
 from IPScanner import IPScanner
-import _thread
 import threading
 import argparse
-import queue
 """
 11/28/17
 Authors: Ethan Hendrix, Hitarth Patel
@@ -44,24 +42,17 @@ def thread_task(fileSrc,source_ip,available_hosts):
     Parse the file - return an array of packets
     packet generator generates packets from that array
     """
-    ##q = queue.Queue()
-
-    ###while True:
-        ##pcapFile = q.get()
-    # if fileSrc is None:
-    #     break
     ## Make fileparser and PacketGenerator
     fp = FileParser(fileSrc)
     pg = PacketGenerator(source_ip,available_hosts,fileSrc)
     fp.parseFile()
     pkts = fp.getPktData()
+    count = 0
     for pkt in pkts:
+        count += 1
         pg.generate(pkt)
-        ## q.task_done()
+    print("\t\t Sent ", count," packets.")
 
-
-    #print("\nYour packets have finished being generated and sent - please check the log file")
-    #print("Log file(s) located: ",logFileLocation)
 
 def main():
     """
@@ -91,7 +82,6 @@ def main():
 
         pg = PacketGenerator(source_ip,available_hosts)
         """
-        ## q = queue.Queue()
         threads = []
         ## creating threads
         print("====================================================")
@@ -99,6 +89,7 @@ def main():
         thread_count = 1
         for i in range(getListSize(args)):
             print("\t Thread " + str(thread_count) + " created.")
+            print("\t\t This file was " + fileSrcArr[i] + " used.")
             thread_count += 1
             t = threading.Thread(target=thread_task(fileSrcArr[i],source_ip,available_hosts))
             t.start()
