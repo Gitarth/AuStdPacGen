@@ -97,18 +97,6 @@ def main():
         print("\n===================================================")
 
         ##print(threads)
-        """
-        for file_path in args.pcapfiles:
-            q.put(file_path)
-
-        # wait for threads to be finished
-        q.join()
-
-        # to stop thread_task
-        for i in range(getListSize):
-            q.put(None)
-        # to join threads after completion
-        """
         for t in threads:
             t.join()
 
